@@ -31,7 +31,7 @@ public class BankTransactionService {
 		long accNum = bankAccount.getAccountNum();
 		int length = Long.toString(Math.abs(accNum)).length();
 		if(length != accountNumLen) {
-			throw new Exception("The length of the coount Number must be 12");
+			throw new Exception("The length of the account Number must be 12");
 		}
 		BankAccount newAccount = bankDao.save(bankAccount);
 		return newAccount.getId()+"";
