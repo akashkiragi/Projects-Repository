@@ -1,19 +1,21 @@
 package com.bank.project.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import java.util.UUID;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="bank_account", uniqueConstraints = @UniqueConstraint(columnNames ={"account_num"}))
+@Table(name="bank_account", uniqueConstraints = @UniqueConstraint(columnNames ={"accountNum"}))
 public class BankAccount {
 
 		@Id
-		@GeneratedValue(strategy = GenerationType.UUID)
-		private String id;
+		//@GeneratedValue(strategy = GenerationType.)
+		private String id =  UUID.randomUUID().toString();
 		private String name;
 		private Long accountNum;
 		private double balance;
