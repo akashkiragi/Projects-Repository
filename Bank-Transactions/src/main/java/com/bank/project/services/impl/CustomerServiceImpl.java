@@ -3,6 +3,7 @@ package com.bank.project.services.impl;
 import org.springframework.stereotype.Service;
 
 import com.bank.project.dto.CreateAccountRequestDTO;
+import com.bank.project.exception.AccountHandleException;
 import com.bank.project.models.Account;
 import com.bank.project.models.BranchDetails;
 import com.bank.project.models.Customer;
@@ -12,6 +13,7 @@ import com.bank.project.utils.BankAccountConstants;
 import com.bank.project.utils.BankDataUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	public Customer createCustomer(CreateAccountRequestDTO requestDTO) {		
 		
-		
 		Customer custDetails =requestDTO.getCustomerDTO().getCustomer();		
 		String branchCode = requestDTO.getBranch().getBranchCode();
 		
@@ -44,7 +45,14 @@ public class CustomerServiceImpl implements CustomerService {
 		account.setCreatedBy(1);
 		account.setCustomer(custDetails);
 		custDetails.setAccount(account);
-		return customerRepository.save(custDetails);
+		
+		try {
+			custDetails = customerRepository.save(custDetails);
+		}catch (Exception exception){
+			throw new AccountHandleException("Failedd to create account", HttpStatus.CONFLICT);
+		}
+		
+		return custDetails;
 		
 	}
 
