@@ -18,7 +18,7 @@ public class CreateAccountRequestDTO {
 
 	// Getters and setters
 
-	public CustomerDTO getCustomerDTO() {
+	public CustomerDTO getCustomer() {
 		return customer;
 	}
 
@@ -89,11 +89,8 @@ public class CreateAccountRequestDTO {
 
 		public void setAddress(String address) {
 			this.address = address;
-		}
+		}	
 		
-		public Customer getCustomer() {
-			return new Customer(this.name, this.email, this.phoneNumber, this.address);
-		}
 	}
 
 	public static class AccountDTO {

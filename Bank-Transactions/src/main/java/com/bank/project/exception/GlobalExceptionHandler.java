@@ -21,7 +21,7 @@ public class GlobalExceptionHandler  {
                 errorDto,
                 java.time.ZonedDateTime.now().toString()
         );
-        return new ResponseEntity<>(errorResponse, exception.getStatus());
+        return new ResponseEntity<>(errorResponse,  HttpStatus.BAD_REQUEST);
 	}
 	
 }

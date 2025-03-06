@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	public Customer createCustomer(CreateAccountRequestDTO requestDTO) {		
 		
-		Customer custDetails =requestDTO.getCustomerDTO().getCustomer();		
+		Customer custDetails =new Customer(requestDTO.getCustomer());		
 		String branchCode = requestDTO.getBranch().getBranchCode();
 		
 		Account account = new Account();
@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		try {
 			custDetails = customerRepository.save(custDetails);
-		}catch (Exception exception){
+		} catch (Exception exception) {				
 			throw new AccountHandleException("Failedd to create account", HttpStatus.CONFLICT);
 		}
 		

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.bank.project.dto.CreateAccountRequestDTO;
 import com.bank.project.dto.CreateAccountRequestDTO.CustomerDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -38,6 +39,15 @@ public class Customer implements Serializable{
 
     
     public Customer() {}
+    
+    public Customer(CustomerDTO custDTO) {
+    	
+    	this.name = custDTO.getName();
+		this.email = custDTO.getEmail();
+		this.phoneNumber = custDTO.getPhoneNumber();
+		this.address = custDTO.getAddress();
+    	
+    }
     
 	public Customer(String name, String email, String phoneNumber, String address) {
 		super();
