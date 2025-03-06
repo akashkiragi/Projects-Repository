@@ -32,24 +32,24 @@ public class Account implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountId;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String accountNumber;
 
-    @Column(nullable = false)
+    
     private Double balance;
     
-    @Column(nullable = false)
-    private String createdBy;
-
-    @ManyToOne(fetch = FetchType.EAGER) // Ensure EAGER loading
-    @JoinColumn(name = "customer_id",referencedColumnName = "customerId")
-    @JsonBackReference // Prevent infinite recursion during serialization
-    private Customer customer;  
+  
+    private int createdBy;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_code", referencedColumnName = "branch_code", nullable = false)
-    @JsonManagedReference
-    private BranchDetails branchDetails;
+    private String branchCode;   
+    
+    @OneToOne
+    @JoinColumn(name = "customer_id", nullable = false, unique = true) // Foreign Key
+    @JsonBackReference
+    private Customer customer;
+
+    
+   
 
    // @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -96,20 +96,21 @@ public class Account implements Serializable{
 	}
 
 	
-	public String getCreatedBy() {
+	public int getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(int createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	public BranchDetails getBranchDetails() {
-		return branchDetails;
+
+	public String getBranchCode() {
+		return branchCode;
 	}
 
-	public void setBranchDetails(BranchDetails branchDetails) {
-		this.branchDetails = branchDetails;
+	public void setBranchCode(String branchCode) {
+		this.branchCode = branchCode;
 	}
 	
 	

@@ -2,10 +2,13 @@ package com.bank.project.services.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.bank.project.dto.CreateAccountRequestDTO;
 import com.bank.project.models.Account;
+import com.bank.project.models.BranchDetails;
 import com.bank.project.models.Customer;
 import com.bank.project.repositories.CustomerRepository;
 import com.bank.project.services.CustomerService;
+import com.bank.project.utils.BankAccountConstants;
 import com.bank.project.utils.BankDataUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +29,22 @@ public class CustomerServiceImpl implements CustomerService {
 		this.customerRepository = customerRepository;
 	}
 
-	public Customer createCustomer(Customer customer) {
-		bankDataUtils.validateCustomer(customer);
+	public Customer createCustomer(CreateAccountRequestDTO requestDTO) {		
+		
+		
+		Customer custDetails =requestDTO.getCustomerDTO().getCustomer();		
+		String branchCode = requestDTO.getBranch().getBranchCode();
+		
 		Account account = new Account();
-		account.setAccountNumber(null);
-		return customerRepository.save(customer);
+		BranchDetails branchDetails = new BranchDetails(branchCode);
+		account.setBalance(BankAccountConstants.ZERO);
+		String accNum = bankDataUtils.createAccountNumber(branchCode);
+		account.setAccountNumber(accNum);
+		account.setBranchCode(branchCode);
+		account.setCreatedBy(1);
+		account.setCustomer(custDetails);
+		custDetails.setAccount(account);
+		return customerRepository.save(custDetails);
 		
 	}
 

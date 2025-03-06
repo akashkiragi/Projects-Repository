@@ -3,11 +3,12 @@ package com.bank.project.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.bank.project.dto.CreateAccountRequestDTO;
 import com.bank.project.models.Customer;
 
 public interface CustomerService {
 
-	Customer createCustomer(Customer customer);
+	Customer createCustomer(CreateAccountRequestDTO requestDto);
 
 	void deleteCustomer(Integer id);
 

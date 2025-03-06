@@ -37,4 +37,10 @@ public class BankDataUtils {
 	            }
 	        }
 	    }
+
+		public String createAccountNumber(String branchName) {
+			long accountNum = Math.round(Math.random()*1000);
+			return branchName+accountNum;		
+			
+		}
 }

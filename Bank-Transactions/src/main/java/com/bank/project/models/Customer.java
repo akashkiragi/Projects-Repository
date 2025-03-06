@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.bank.project.dto.CreateAccountRequestDTO.CustomerDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -23,17 +24,28 @@ public class Customer implements Serializable{
 	private static final long serialVersionUID = 8391401223150703849L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customerId;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int customerId;
 
     private String name;
     private String email;
     private String phoneNumber;
-    private String address;
-
+    private String address; 
+    
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Avoid recursion during serialization
+    @JsonManagedReference // Prevents infinite recursion in serialization
     private Account account;
+
+    
+    public Customer() {}
+    
+	public Customer(String name, String email, String phoneNumber, String address) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
 
 	public Integer getCustomerId() {
 		return customerId;

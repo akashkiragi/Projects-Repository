@@ -20,11 +20,10 @@ public class CustomerController {
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
-
-    @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
-    }
+	/*
+	 * @PostMapping public Customer createCustomer(@RequestBody Customer customer) {
+	 * return customerService.createCustomer(customer); }
+	 */
 
     @GetMapping
     public List<Customer> getAllCustomers() {

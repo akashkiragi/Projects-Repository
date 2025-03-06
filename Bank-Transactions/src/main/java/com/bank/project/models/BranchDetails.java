@@ -30,11 +30,20 @@ public class BranchDetails implements Serializable{
     @Column(name = "ifsc_code", unique = true, nullable = false)
     private String ifscCode;
 
-    @OneToMany(mappedBy = "branchDetails", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
-    private List<Account> accounts;
+    
+    
+   
 
-    // Getters and Setters
+    public BranchDetails(String branchCode) {
+		this.branchCode = branchCode;
+	}
+
+	public BranchDetails(String branchCode, String ifscCode) {
+		this.branchCode = branchCode;
+		this.ifscCode = ifscCode;
+	}
+
+	// Getters and Setters
     public Integer getBranchId() {
         return branchId;
     }
@@ -67,11 +76,4 @@ public class BranchDetails implements Serializable{
         this.ifscCode = ifscCode;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
 }
