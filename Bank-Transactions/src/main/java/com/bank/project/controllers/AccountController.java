@@ -35,7 +35,7 @@ public class AccountController {
     	return new ResponseDTO<>(HttpStatus.CREATED.value(), customerService.createCustomer(requestDto), java.time.ZonedDateTime.now().toString());
     }
 
-    @GetMapping
+    @GetMapping("/get-accounts")
     public List<Account> getAllAccounts() {
         return accountService.getAllAccounts();
     }

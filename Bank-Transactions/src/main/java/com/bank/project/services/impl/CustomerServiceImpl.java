@@ -30,11 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	public Customer createCustomer(CreateAccountRequestDTO requestDTO) {		
-		
-		
-		Customer custDetails =requestDTO.getCustomerDTO().getCustomer();		
-		String branchCode = requestDTO.getBranch().getBranchCode();
-		
+		Customer custDetails = new Customer( requestDTO.getCustomer());		
+		String branchCode = requestDTO.getBranch().getBranchCode()		
 		Account account = new Account();
 		BranchDetails branchDetails = new BranchDetails(branchCode);
 		account.setBalance(BankAccountConstants.ZERO);
